@@ -102,7 +102,7 @@ extension String {
 	}
 	
 	//------------------------------------
-	
+	/// Count of character
 	func CountOf(char: Character) -> UInt {
 		var count : UInt = 0
 		
