@@ -92,6 +92,9 @@ func PathClassUsage() {
 	let path = "/A/Path/to/text/file##"
 	let pc = PathClass(path: path)!
 	
+	pc.RemoveLastComponent()
+	print(pc.path)
+	
 	pc.AppendDirMarker()
 	print(pc.path)
 	

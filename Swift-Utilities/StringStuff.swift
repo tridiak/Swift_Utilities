@@ -8,10 +8,7 @@
 
 import Foundation
 
-extension String {
-	
-	//------------------------
-	
+extension String {	
 	/// Return a string which does not possess any character in 'set'.
 	/// Or return a string which only possesses characters in 'set'.
 	func RemoveFrom(set: CharacterSet, invert : Bool) -> String {

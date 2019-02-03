@@ -145,7 +145,8 @@ class PathClass : CustomDebugStringConvertible {
 		if path.isEmpty { return }
 		
 		if let idx = path.range(of: String(dirMarker), options: .backwards, range: nil, locale: nil) {
-			path.removeSubrange(idx.upperBound..<path.endIndex)
+			// FIX : idx.upperBound -> idx.lowerBound
+			path.removeSubrange(idx.lowerBound..<path.endIndex)
 		}
 		else {
 			path = ""

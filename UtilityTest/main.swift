@@ -10,8 +10,8 @@ import Foundation
 
 //PNUsage()
 //DirContentsUsage()
-StringStuffUsage()
-//PathClassUsage()
+//StringStuffUsage()
+PathClassUsage()
 //ColourUsage()
 //BitFieldUsage()
 
