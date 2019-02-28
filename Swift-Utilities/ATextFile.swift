@@ -70,7 +70,7 @@ class ATextFile : ABinaryFile, Sequence {
 		lines.removeAll()
 		var s : [UInt8] = []
 		var idx : UInt64 = 0
-		var lastNotLF = true
+		var lastIsLF = true
 		for _ in 0..<dataSize {
 			let c = super[idx]!
 			if IsLineFeed(idx: &idx) {
@@ -79,17 +79,17 @@ class ATextFile : ABinaryFile, Sequence {
 				}
 				lines.append(S)
 				s.removeAll()
-				lastNotLF = true
+				lastIsLF = true
 			}
 			else {
 				s.append(c)
-				lastNotLF = false
+				lastIsLF = false
 			}
 			
 			idx += 1
 		}
 		
-		if lastNotLF {
+		if !lastIsLF {
 			guard let S = String(bytes: s, encoding: .utf8) else {
 				throw ATFExceptions.invalidUTF8Char
 			}
