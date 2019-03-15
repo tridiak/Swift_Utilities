@@ -37,6 +37,8 @@
 		92B334E321FC207E0052BFC8 /* ABigTextFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B334E121FC20230052BFC8 /* ABigTextFile.swift */; };
 		92B334E521FC33DA0052BFC8 /* TreeHier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B334E421FC33DA0052BFC8 /* TreeHier.swift */; };
 		92B334E621FC3A8C0052BFC8 /* TreeHier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B334E421FC33DA0052BFC8 /* TreeHier.swift */; };
+		92F87A37223C4085005DF391 /* SimpleAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F87A36223C4085005DF391 /* SimpleAlert.swift */; };
+		92F87A38223C4085005DF391 /* SimpleAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F87A36223C4085005DF391 /* SimpleAlert.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -71,6 +73,7 @@
 		92998D952203A11F00703250 /* AtomicInteger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AtomicInteger.swift; sourceTree = "<group>"; };
 		92B334E121FC20230052BFC8 /* ABigTextFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ABigTextFile.swift; sourceTree = "<group>"; };
 		92B334E421FC33DA0052BFC8 /* TreeHier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeHier.swift; sourceTree = "<group>"; };
+		92F87A36223C4085005DF391 /* SimpleAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleAlert.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +139,7 @@
 				92B334E421FC33DA0052BFC8 /* TreeHier.swift */,
 				9258302921BCBA650030F7DE /* Usage.swift */,
 				92998D952203A11F00703250 /* AtomicInteger.swift */,
+				92F87A36223C4085005DF391 /* SimpleAlert.swift */,
 			);
 			path = "Swift-Utilities";
 			sourceTree = "<group>";
@@ -255,6 +259,7 @@
 				92424BE221C6E89500079858 /* StringStuff.swift in Sources */,
 				92B334E321FC207E0052BFC8 /* ABigTextFile.swift in Sources */,
 				92424BE921C6E89500079858 /* ThreadValue.swift in Sources */,
+				92F87A38223C4085005DF391 /* SimpleAlert.swift in Sources */,
 				92424BE621C6E89500079858 /* PosNeg.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -266,6 +271,7 @@
 				9238C51821F187120007736D /* ATextFile.swift in Sources */,
 				92B334E521FC33DA0052BFC8 /* TreeHier.swift in Sources */,
 				92B334E221FC20230052BFC8 /* ABigTextFile.swift in Sources */,
+				92F87A37223C4085005DF391 /* SimpleAlert.swift in Sources */,
 				9258302C21BCBB3D0030F7DE /* ThreadValue.swift in Sources */,
 				9258302E21BCBDF40030F7DE /* DirContents.swift in Sources */,
 				925D0A6E21C603D8006BA8AE /* BitField.swift in Sources */,
