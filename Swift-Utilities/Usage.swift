@@ -573,3 +573,8 @@ func HierUsage() {
 	detachedNode.Iterate(mode: .depthFirst)
 	
 }
+
+func CollectionUsage() {
+	let D = [1:"!", 2:"@", 3:"#"]
+	print(D.RandomElement()!)
+}

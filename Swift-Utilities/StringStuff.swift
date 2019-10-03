@@ -8,7 +8,9 @@
 
 import Foundation
 
-extension String {	
+extension String {
+	static let CompareOptsNone = String.CompareOptions.init(rawValue: 0)
+	
 	/// Return a string which does not possess any character in 'set'.
 	/// Or return a string which only possesses characters in 'set'.
 	func RemoveFrom(set: CharacterSet, invert : Bool) -> String {
@@ -242,6 +244,39 @@ extension String {
 		return ary
 	}
 	
+	/// Returns String array of components separated by 'seperator'. But if the seperator in in-between
+	/// the upMarker & downMarker, it is ignored.
+	/// S = "A,B,C,[D,E,F,G],H".
+	///	S.SameLevelSplit(",", "[", "]") will return ["A", "B", "C", "D,E,F,G", "H"].
+	///
+	/// - Parameters:
+	///   - sep: Divider
+	///   - up: Up or open character.
+	///   - down: Down or close character.
+	/// - Returns: Will return nil if up = down, up = sep, down = sep, count(up) != count(down) or "level" drops below 0.
+	///	Otherwise it will return an array of components.
+	func SameLevelSplit(separator sep: Character, upMarker up: Character, downMarker down: Character) -> [String]? {
+		if up == down || sep == up || sep == down { return nil }
+		if self.CountOf(char: up) != self.CountOf(char: down) { return nil }
+		if self.CountOf(char: up) == 0  { return self.split(separator: sep).ToStringArray() }
+		
+		var s : String = ""
+		var ary : [String] = []
+		var level = 0
+		for c in self {
+			if c == up { level += 1 }
+			else if c == down { level -= 1}
+			else if c == sep && level == 0 { ary.append(s); s = "" }
+			else {
+				s.append(c)
+			}
+			
+			if level < 0 { return nil }
+		}
+		if !s.isEmpty { ary.append(s) }
+		return ary
+	}
+	
 	/// Return two substrings before and after first occurrence of 'separator'.
 	func BeforeAndAfter(separator: String) -> (before:String,after:String?) {
 		guard let idx = self.range(of: separator) else { return (self, nil) }
@@ -285,6 +320,59 @@ extension String {
 		
 		return index(startIndex, offsetBy: N)
 	}
+	
+	/// Return substring after string.index
+	func SubstringAfter(index: String.Index) -> Substring? {
+		if index == self.endIndex { return nil }
+		let idx = self.index(after: index)
+		if idx == self.endIndex { return nil }
+		return self[idx...]
+	}
+	
+	/// Append string if string is not empty
+	mutating func AppendNotEmpty(_ S: String) {
+		if !isEmpty { self.append(S) }
+	}
+	
+	/// Passed character is removed if it is the last character in the string.
+	@discardableResult mutating func RemoveIfLast(char: Character) -> String {
+		if let C = self.last, C == char  { self.removeLast() }
+		return self
+	}
+	
+	/// Returns true if string starts with passed string
+	func FirstPartIs(_ S: String, options: String.CompareOptions = CompareOptsNone) -> Bool {
+		return self.range(of: S, options: options, range: nil, locale: nil)?.lowerBound == self.startIndex
+	}
+	
+	/// Returns true if string ends with passed string
+	func LastPartIs(_ S: String, options: String.CompareOptions = CompareOptsNone) -> Bool {
+		return self.range(of: S, options: .init(rawValue: 0), range: nil, locale: nil)?.upperBound == self.endIndex
+	}
+	
+	/// Returns true and the element if any element in the passed String sequence is the first part of the String
+	func FirstPartIsOne<T: Sequence>(of S: T, options: String.CompareOptions = CompareOptsNone) -> (B:Bool, S:String?) where T.Element == String {
+		for s in S {
+			if FirstPartIs(s, options: options) { return (true, s) }
+		}
+		return (false, nil)
+	}
+	
+	/// Returns true and the element if any element in the passed String sequence is the last part of the String
+	func LastPartIsOne<T: Sequence>(of S: T, options: String.CompareOptions = CompareOptsNone) -> (B:Bool, S:String?) where T.Element == String {
+		for s in S {
+			if LastPartIs(s, options: options) { return (true, s) }
+		}
+		return (false, nil)
+	}
+	
+	/// Compares two optional strings. If both are nil, true is returned.
+	/// If one is nil, false is returned. Otherwise standard string comparison.
+	static func CompareNil(_ s1 : String?, _ s2 : String?) -> Bool {
+		if s1 == nil && s2 == nil { return true }
+		if s1 == nil || s2 == nil { return false }
+		return s1! == s2!
+	}
 }
 
 let hexToValue : [Character:UInt] = ["0":0, "1":1, "2":2, "3":3, "4":4, "5":5, "6":6, "7":7, "8":8,
@@ -295,6 +383,8 @@ let hexToValue : [Character:UInt] = ["0":0, "1":1, "2":2, "3":3, "4":4, "5":5, "
 // MARK:- Array
 
 extension Array where Element : StringProtocol {
+	/// Returns index and length of longest string in array.
+	/// Will return nil if array is empty.
 	func LongestString() -> (index: UInt, length: UInt)? {
 		if isEmpty { return nil }
 		
@@ -311,13 +401,18 @@ extension Array where Element : StringProtocol {
 		return (pos,len)
 	}
 	
+	/// Return lowercase version of string array.
 	func LowerCaseAll() -> [String] {
-		var ary : [String] = []
-		for s in self {
-			ary.append(s.lowercased())
-		}
-		
-		return ary
+		return self.map({ (S) -> String in
+			return S.lowercased()
+		})
+	}
+	
+	/// Return uppercase version of string array.
+	func UpperCaseAll() -> [String] {
+		return self.map({ (S) -> String in
+			return S.uppercased()
+		})
 	}
 	
 	/// Used for converting [Substring] to [String]

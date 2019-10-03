@@ -37,6 +37,10 @@
 		92B334E321FC207E0052BFC8 /* ABigTextFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B334E121FC20230052BFC8 /* ABigTextFile.swift */; };
 		92B334E521FC33DA0052BFC8 /* TreeHier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B334E421FC33DA0052BFC8 /* TreeHier.swift */; };
 		92B334E621FC3A8C0052BFC8 /* TreeHier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B334E421FC33DA0052BFC8 /* TreeHier.swift */; };
+		92ED8BF62344784900DD825C /* CollectionUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92ED8BF52344784900DD825C /* CollectionUtilities.swift */; };
+		92ED8BF72344792A00DD825C /* CollectionUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92ED8BF52344784900DD825C /* CollectionUtilities.swift */; };
+		92ED8BF923447CE800DD825C /* Dice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92ED8BF823447CE800DD825C /* Dice.swift */; };
+		92ED8BFA23447CE800DD825C /* Dice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92ED8BF823447CE800DD825C /* Dice.swift */; };
 		92F87A37223C4085005DF391 /* SimpleAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F87A36223C4085005DF391 /* SimpleAlert.swift */; };
 		92F87A38223C4085005DF391 /* SimpleAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F87A36223C4085005DF391 /* SimpleAlert.swift */; };
 /* End PBXBuildFile section */
@@ -73,6 +77,8 @@
 		92998D952203A11F00703250 /* AtomicInteger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AtomicInteger.swift; sourceTree = "<group>"; };
 		92B334E121FC20230052BFC8 /* ABigTextFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ABigTextFile.swift; sourceTree = "<group>"; };
 		92B334E421FC33DA0052BFC8 /* TreeHier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeHier.swift; sourceTree = "<group>"; };
+		92ED8BF52344784900DD825C /* CollectionUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionUtilities.swift; sourceTree = "<group>"; };
+		92ED8BF823447CE800DD825C /* Dice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dice.swift; sourceTree = "<group>"; };
 		92F87A36223C4085005DF391 /* SimpleAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleAlert.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -140,6 +146,8 @@
 				9258302921BCBA650030F7DE /* Usage.swift */,
 				92998D952203A11F00703250 /* AtomicInteger.swift */,
 				92F87A36223C4085005DF391 /* SimpleAlert.swift */,
+				92ED8BF52344784900DD825C /* CollectionUtilities.swift */,
+				92ED8BF823447CE800DD825C /* Dice.swift */,
 			);
 			path = "Swift-Utilities";
 			sourceTree = "<group>";
@@ -205,6 +213,7 @@
 				TargetAttributes = {
 					92424BDA21C6E88900079858 = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1020;
 					};
 					926EB92D21BB54D10045C464 = {
 						CreatedOnToolsVersion = 10.1;
@@ -249,6 +258,7 @@
 				92B334E621FC3A8C0052BFC8 /* TreeHier.swift in Sources */,
 				92424BE521C6E89500079858 /* Colour.swift in Sources */,
 				92424BDE21C6E88900079858 /* main.swift in Sources */,
+				92ED8BFA23447CE800DD825C /* Dice.swift in Sources */,
 				92424BE721C6E89500079858 /* BitField.swift in Sources */,
 				92424BEA21C6E89500079858 /* DirContents.swift in Sources */,
 				92424BE821C6E89500079858 /* Usage.swift in Sources */,
@@ -258,6 +268,7 @@
 				92424BE321C6E89500079858 /* ABinaryFile.swift in Sources */,
 				92424BE221C6E89500079858 /* StringStuff.swift in Sources */,
 				92B334E321FC207E0052BFC8 /* ABigTextFile.swift in Sources */,
+				92ED8BF72344792A00DD825C /* CollectionUtilities.swift in Sources */,
 				92424BE921C6E89500079858 /* ThreadValue.swift in Sources */,
 				92F87A38223C4085005DF391 /* SimpleAlert.swift in Sources */,
 				92424BE621C6E89500079858 /* PosNeg.swift in Sources */,
@@ -276,10 +287,12 @@
 				9258302E21BCBDF40030F7DE /* DirContents.swift in Sources */,
 				925D0A6E21C603D8006BA8AE /* BitField.swift in Sources */,
 				926EB93A21BB54EE0045C464 /* StringStuff.swift in Sources */,
+				92ED8BF923447CE800DD825C /* Dice.swift in Sources */,
 				92998D962203A11F00703250 /* AtomicInteger.swift in Sources */,
 				9258303021BCCA0C0030F7DE /* Misc.swift in Sources */,
 				926EB93C21BB64FC0045C464 /* Colour.swift in Sources */,
 				9258302121BC8E5B0030F7DE /* ABinaryFile.swift in Sources */,
+				92ED8BF62344784900DD825C /* CollectionUtilities.swift in Sources */,
 				926EB93E21BB81500045C464 /* PathClass.swift in Sources */,
 				9258302821BCAC710030F7DE /* PosNeg.swift in Sources */,
 				9258302A21BCBA650030F7DE /* Usage.swift in Sources */,
@@ -295,7 +308,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7N28673KX9;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -305,7 +318,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7N28673KX9;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};

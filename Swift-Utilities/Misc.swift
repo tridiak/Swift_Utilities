@@ -69,3 +69,9 @@ public struct IMAIterator<T> : IteratorProtocol {
 		return E
 	}
 }
+
+//-----------------------------------------------
+
+func RndBool() -> Bool {
+	return arc4random() % 2 == 1 ? true : false
+}
