@@ -11,62 +11,104 @@ import Foundation
 extension String {
 	static let CompareOptsNone = String.CompareOptions.init(rawValue: 0)
 	
-	/// Return a string which does not possess any character in 'set'.
-	/// Or return a string which only possesses characters in 'set'.
-	func RemoveFrom(set: CharacterSet, invert : Bool) -> String {
+	static func CharInSet(char: Character, set: CharacterSet) -> Bool {
+		let s = String(char)
+		return s.rangeOfCharacter(from: set) != nil
+	}
+	
+	/// Remove all characters in set from string and returning a new string.
+	/// - Parameter set: Characters to remove.
+	/// - Returns: resultant string
+	func RemoveFrom(set: CharacterSet) -> String {
+		if self.isEmpty { return self }
 		var s : String = ""
 		
-		if invert {
-			for c in self {
-				if !set.contains(c.unicodeScalars.first!) { s.append(c) }
-			}
+		for c in self {
+			if !set.contains(c.unicodeScalars.first!) { s.append(c) }
 		}
-		else {
-			for c in self {
-				if set.contains(c.unicodeScalars.first!) { s.append(c) }
-			}
-		}
+		
 		return s
 	}
 	
-	// Remove all characters in 'set' from 'self'.
-	// Or only keep characters in 'set'
-	mutating func RemoveFromM(set: CharacterSet, invert : Bool) {
-		self = RemoveFrom(set: set, invert: invert)
+	/// Mutates the string by removing characters in set.
+	/// - Parameter set: Characters to remove.
+	mutating func RemoveFromM(set: CharacterSet) {
+		self = RemoveFrom(set: set)
 	}
 	
-	/// Return a string which does not possess any character in 'set'.
-	/// Or return a string which only possesses characters in 'set'.
-	func RemoveFrom(set: String, invert: Bool) -> String {
+	
+	/// Remove all characters in set from string and returning a new string.
+	/// Calls through to RemoveFrom(set:CharacterSet)
+	/// - Parameter set: string contains characters to remove.
+	/// - Returns: resultant string
+	func RemoveFrom(set: String) -> String {
 		let S = CharacterSet.init(charactersIn: set)
 		
-		return RemoveFrom(set: S, invert: invert)
+		return RemoveFrom(set: S)
 	}
 	
-	// Remove all characters in 'set' from 'self'.
-	// Or only keep characters in 'set'
-	mutating func RemoveFromM(set: String, invert : Bool) {
-		self = RemoveFrom(set: set, invert: invert)
+	/// Mutates the string by removing characters in set.
+	/// - Parameter set: string contains characters to remove.
+	mutating func RemoveFromM(set: String) {
+		self = RemoveFrom(set: set)
+	}
+	
+	/// Keep all characters in set from string and returning a new string.
+	/// - Parameter set: Characters to remove.
+	/// - Returns: resultant string
+	func KeepThoseIn(set: CharacterSet) -> String {
+		if self.isEmpty { return self }
+		var s : String = ""
+		
+		for c in self {
+			if set.contains(c.unicodeScalars.first!) { s.append(c) }
+		}
+		
+		return s
+	}
+	
+	/// Mutates the string by keeping the characters in set.
+	/// - Parameter set: Characters to remove.
+	mutating func KeepThoseInM(set: CharacterSet) {
+		self = RemoveFrom(set: set)
+	}
+	
+	/// Keep all characters in set from string and returning a new string.
+	/// Calls through to KeepThoseIn(set:CharacterSet)
+	/// - Parameter set: string contains characters to keep.
+	/// - Returns: resultant string
+	func KeepThoseIn(set: String) -> String {
+		let S = CharacterSet.init(charactersIn: set)
+		
+		return RemoveFrom(set: S)
+	}
+	
+	/// Mutates the string by keeping the characters in set.
+	/// - Parameter set: Characters to remove.
+	mutating func KeepThoseInM(set: String) {
+		self = RemoveFrom(set: set)
 	}
 	
 	//--------------------------------
 	
 	/// Return true if 'self' only contains characters in 'chars'.
 	/// Or return true if 'self' does not posses any character in 'chars'.
-	func OnlyContains(chars: CharacterSet, invert: Bool) -> Bool {
+	func OnlyContains(chars: CharacterSet) -> Bool {
 		if chars.isEmpty { return false }
 		
-		let B = self.rangeOfCharacter(from: chars, options: String.CompareOptions.init(rawValue: 0), range: nil) != nil
-		if invert { return !B }
-		return B
+		for c in self {
+			if !String.CharInSet(char: c, set: chars)  { return false }
+		}
+		
+		return true
 	}
 	
 	/// Return true if 'self' only contains characters in 'chars'.
 	/// Or return true if 'self' does not posses any character in 'chars'.
-	func OnlyContains(chars: String, invert: Bool) -> Bool {
+	func OnlyContains(chars: String) -> Bool {
 		let S = CharacterSet.init(charactersIn: chars)
 		
-		return OnlyContains(chars: S, invert: invert)
+		return OnlyContains(chars: S)
 	}
 	
 	//----------------------------------
@@ -76,7 +118,7 @@ extension String {
 		var s : String = ""
 		
 		for c in self {
-			if chars.contains(c.unicodeScalars.first!) { s.append(with) }
+			if String.CharInSet(char: c, set: chars) { s.append(with) }
 			else { s.append(c) }
 		}
 		
@@ -153,7 +195,7 @@ extension String {
 	}
 	
 	/// Eliminates consecutive characters.
-	mutating func ReduceConsecutiveChars() {
+	mutating func ReduceConsecutiveCharsM() {
 		self = ReduceConsecutiveChars()
 	}
 	
@@ -176,7 +218,7 @@ extension String {
 	}
 	
 	/// Reduce consecutive occurrences of 'char' to a single character.
-	mutating func ReduceConsecutiveCharsOf(char: Character) {
+	mutating func ReduceConsecutiveCharsOfM(char: Character) {
 		self = ReduceConsecutiveCharsOf(char: char)
 	}
 	
@@ -373,6 +415,60 @@ extension String {
 		if s1 == nil || s2 == nil { return false }
 		return s1! == s2!
 	}
+	
+	/// Returns first N characters of string. If self is empty, nil will be returned.
+	/// If count requested is 0, an empty string will be returned.
+	/// Not the most efficient method so keep the count small.
+	func FirstNChars(count ct: UInt) -> String? {
+		if count == 0 { return nil }
+		if ct == 0 { return "" }
+		var s = ""
+		var i = UInt(0)
+		for c in self {
+			s.append(c)
+			i += 1
+			if i == ct { break }
+		}
+		
+		return s
+	}
+	
+	/// Return substring after '.'
+	///
+	/// - Returns: nil if extension(.) does not exist, otherwise (extension, everything before '.')
+	func GetExtension() -> (ext:String, rem:String)? {
+		guard let idx = self.range(of: ".", options: String.CompareOptions.backwards, range: nil, locale: nil) else {
+			return nil
+		}
+		
+		if idx.lowerBound == self.endIndex {return ("", self)}
+		let s = self[self.index(after: idx.lowerBound)...]
+		return (String(s), String(self[..<idx.lowerBound]) )
+	}
+	
+	/// Change the extension of the passed string.
+	///
+	/// - Parameter to: new extension. Can be empty.
+	/// - Returns: String with new extension.
+	func ChangeExtension(to:String) -> String {
+		guard let idx = self.range(of: ".", options: String.CompareOptions.backwards, range: nil, locale: nil) else {
+			return self
+		}
+		
+		let newString = self[..<idx.lowerBound] + "." + to
+		return newString
+	}
+	
+	/// Remove extension and the '.'. Searches from end of string.
+	///
+	/// - Returns: orignal string if no extension otherwise all characters before extension
+	func DropExtension() -> String {
+		guard let idx = self.range(of: ".", options: String.CompareOptions.backwards, range: nil, locale: nil) else {
+			return self
+		}
+		
+		return String(self[..<idx.lowerBound])
+	}
 }
 
 let hexToValue : [Character:UInt] = ["0":0, "1":1, "2":2, "3":3, "4":4, "5":5, "6":6, "7":7, "8":8,
@@ -423,6 +519,25 @@ extension Array where Element : StringProtocol {
 		}
 		
 		return ary
+	}
+	
+	/// Case insensitive check.
+	///
+	/// - Parameter S: String to check
+	/// - Returns: true if is does
+	func ContainsCI(_ S: String) -> Bool {
+		for s in self {
+			if s.lowercased() == S.lowercased() { return true }
+		}
+		return false
+	}
+	
+	mutating func RemoveEmpty() {
+		var idx = self.startIndex
+		while idx < self.endIndex {
+			if self[idx].isEmpty { self.remove(at: idx) }
+			else { idx += 1 }
+		}
 	}
 }
 

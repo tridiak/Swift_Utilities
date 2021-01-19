@@ -9,7 +9,7 @@
 import Foundation
 
 struct BitField : CustomStringConvertible {
-	// Sescription prints out starting from lowest bit.
+	// Description prints out starting from lowest bit.
 	var description: String {
 		var s = ""
 		var spaceIdx = 1

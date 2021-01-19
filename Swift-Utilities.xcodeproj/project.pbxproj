@@ -27,6 +27,8 @@
 		9258302E21BCBDF40030F7DE /* DirContents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9258302D21BCBDF40030F7DE /* DirContents.swift */; };
 		9258303021BCCA0C0030F7DE /* Misc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9258302F21BCCA0C0030F7DE /* Misc.swift */; };
 		925D0A6E21C603D8006BA8AE /* BitField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925D0A6D21C603D8006BA8AE /* BitField.swift */; };
+		92698125237C92FC00C7AB05 /* AppList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92698124237C92FC00C7AB05 /* AppList.swift */; };
+		92698127237C930E00C7AB05 /* ArrayExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92698126237C930E00C7AB05 /* ArrayExt.swift */; };
 		926EB93321BB54D10045C464 /* Swift_Utilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 926EB93121BB54D10045C464 /* Swift_Utilities.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		926EB93A21BB54EE0045C464 /* StringStuff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926EB93921BB54EE0045C464 /* StringStuff.swift */; };
 		926EB93C21BB64FC0045C464 /* Colour.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926EB93B21BB64FC0045C464 /* Colour.swift */; };
@@ -37,6 +39,7 @@
 		92B334E321FC207E0052BFC8 /* ABigTextFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B334E121FC20230052BFC8 /* ABigTextFile.swift */; };
 		92B334E521FC33DA0052BFC8 /* TreeHier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B334E421FC33DA0052BFC8 /* TreeHier.swift */; };
 		92B334E621FC3A8C0052BFC8 /* TreeHier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B334E421FC33DA0052BFC8 /* TreeHier.swift */; };
+		92DCCE3B25B6957F0084C1F7 /* GBColour.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DCCE3A25B6957F0084C1F7 /* GBColour.swift */; };
 		92ED8BF62344784900DD825C /* CollectionUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92ED8BF52344784900DD825C /* CollectionUtilities.swift */; };
 		92ED8BF72344792A00DD825C /* CollectionUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92ED8BF52344784900DD825C /* CollectionUtilities.swift */; };
 		92ED8BF923447CE800DD825C /* Dice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92ED8BF823447CE800DD825C /* Dice.swift */; };
@@ -68,6 +71,8 @@
 		9258302D21BCBDF40030F7DE /* DirContents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirContents.swift; sourceTree = "<group>"; };
 		9258302F21BCCA0C0030F7DE /* Misc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Misc.swift; sourceTree = "<group>"; };
 		925D0A6D21C603D8006BA8AE /* BitField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitField.swift; sourceTree = "<group>"; };
+		92698124237C92FC00C7AB05 /* AppList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppList.swift; sourceTree = "<group>"; };
+		92698126237C930E00C7AB05 /* ArrayExt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayExt.swift; sourceTree = "<group>"; };
 		926EB92E21BB54D10045C464 /* Swift_Utilities.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Swift_Utilities.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		926EB93121BB54D10045C464 /* Swift_Utilities.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Swift_Utilities.h; sourceTree = "<group>"; };
 		926EB93221BB54D10045C464 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -77,6 +82,7 @@
 		92998D952203A11F00703250 /* AtomicInteger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AtomicInteger.swift; sourceTree = "<group>"; };
 		92B334E121FC20230052BFC8 /* ABigTextFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ABigTextFile.swift; sourceTree = "<group>"; };
 		92B334E421FC33DA0052BFC8 /* TreeHier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeHier.swift; sourceTree = "<group>"; };
+		92DCCE3A25B6957F0084C1F7 /* GBColour.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GBColour.swift; sourceTree = "<group>"; };
 		92ED8BF52344784900DD825C /* CollectionUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionUtilities.swift; sourceTree = "<group>"; };
 		92ED8BF823447CE800DD825C /* Dice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dice.swift; sourceTree = "<group>"; };
 		92F87A36223C4085005DF391 /* SimpleAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleAlert.swift; sourceTree = "<group>"; };
@@ -137,6 +143,7 @@
 				92B334E121FC20230052BFC8 /* ABigTextFile.swift */,
 				926EB93D21BB81500045C464 /* PathClass.swift */,
 				926EB93B21BB64FC0045C464 /* Colour.swift */,
+				92DCCE3A25B6957F0084C1F7 /* GBColour.swift */,
 				9258302721BCAC710030F7DE /* PosNeg.swift */,
 				925D0A6D21C603D8006BA8AE /* BitField.swift */,
 				9258302B21BCBB3D0030F7DE /* ThreadValue.swift */,
@@ -148,6 +155,8 @@
 				92F87A36223C4085005DF391 /* SimpleAlert.swift */,
 				92ED8BF52344784900DD825C /* CollectionUtilities.swift */,
 				92ED8BF823447CE800DD825C /* Dice.swift */,
+				92698124237C92FC00C7AB05 /* AppList.swift */,
+				92698126237C930E00C7AB05 /* ArrayExt.swift */,
 			);
 			path = "Swift-Utilities";
 			sourceTree = "<group>";
@@ -282,10 +291,12 @@
 				9238C51821F187120007736D /* ATextFile.swift in Sources */,
 				92B334E521FC33DA0052BFC8 /* TreeHier.swift in Sources */,
 				92B334E221FC20230052BFC8 /* ABigTextFile.swift in Sources */,
+				92698127237C930E00C7AB05 /* ArrayExt.swift in Sources */,
 				92F87A37223C4085005DF391 /* SimpleAlert.swift in Sources */,
 				9258302C21BCBB3D0030F7DE /* ThreadValue.swift in Sources */,
 				9258302E21BCBDF40030F7DE /* DirContents.swift in Sources */,
 				925D0A6E21C603D8006BA8AE /* BitField.swift in Sources */,
+				92698125237C92FC00C7AB05 /* AppList.swift in Sources */,
 				926EB93A21BB54EE0045C464 /* StringStuff.swift in Sources */,
 				92ED8BF923447CE800DD825C /* Dice.swift in Sources */,
 				92998D962203A11F00703250 /* AtomicInteger.swift in Sources */,
@@ -295,6 +306,7 @@
 				92ED8BF62344784900DD825C /* CollectionUtilities.swift in Sources */,
 				926EB93E21BB81500045C464 /* PathClass.swift in Sources */,
 				9258302821BCAC710030F7DE /* PosNeg.swift in Sources */,
+				92DCCE3B25B6957F0084C1F7 /* GBColour.swift in Sources */,
 				9258302A21BCBA650030F7DE /* Usage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

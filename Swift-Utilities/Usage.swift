@@ -51,8 +51,8 @@ func StringStuffUsage() {
 	let s = "1234567890.qwertyuio"
 	
 	print("*** Remove from \(s) all digits, non-digits")
-	print(s.RemoveFrom(set: "0123456789", invert: false))
-	print(s.RemoveFrom(set: "0123456789", invert: true))
+	print(s.RemoveFrom(set: "0123456789"))
+	print(s.RemoveFrom(set: "0123456789"))
 	
 	print("*** Replace all digits in \(s) with X")
 	print(s.ReplaceAll(chars: "0123456789", with: "X"))

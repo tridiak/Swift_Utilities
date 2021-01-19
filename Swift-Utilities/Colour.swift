@@ -6,7 +6,7 @@
 //  Copyright © 2018 tridiak. All rights reserved.
 //
 
-import Foundation
+import Cocoa
 
 // Using Int16 instead of UInt8 because in future may allow
 // ranges outside of 0-1
@@ -426,5 +426,127 @@ struct Colour : CustomStringConvertible {
 	static func HSVtoCMYK(hsv: ColInfo) -> ColInfo? {
 		guard let rgb = HSVtoRGB(hsv: hsv) else { return nil }
 		return RGBtoCMYK(rgb:rgb)
+	}
+}
+
+
+//---------------------------------------------------------
+// MARK:-
+
+extension NSColor {
+	/// Returns colour as a hex string. Note: colour range can extend outside of 0-1. If any RGB component
+	/// does, nil will be returned. If the colour space cannot be converted to RGB, nil will be
+	/// returned.
+	func AsRGBString(prefix: String = "&", inclAlpha: Bool = false) -> String? {
+		var colS = prefix
+		
+		guard let colRGB = self.usingColorSpace(NSColorSpace.genericRGB) else { return nil }
+		
+		let R = Int16(colRGB.redComponent * 100)
+		let G = Int16(colRGB.greenComponent * 100)
+		let B = Int16(colRGB.blueComponent * 100)
+		
+		if R < 0 || R > 255 || G < 0 || G > 255 || B < 0 || B > 255 { return nil }
+		
+		colS += String(format: "%02X", R)
+		colS += String(format: "%02X", G)
+		colS += String(format: "%02X", B)
+		
+		if inclAlpha {
+			let A = Int16(colRGB.alphaComponent * 100)
+			if A < 0 || A > 255 { return nil }
+			colS += String(format: "%02X", A)
+		}
+		
+		return colS
+	}
+	
+	/// Returns colour as a hex string. Note: colour range can extend outside of 0-1. If any CYMK component
+	/// does, nil will be returned. If the colour space cannot be converted to CYMK, nil will be
+	/// returned.
+	func AsCMYKString(prefix: String = "&", inclAlpha: Bool = false) -> String? {
+		var colS = prefix
+		
+		guard let colRGB = self.usingColorSpace(NSColorSpace.genericCMYK) else { return nil }
+		
+		let C = Int16(colRGB.cyanComponent * 100)
+		let Y = Int16(colRGB.yellowComponent * 100)
+		let M = Int16(colRGB.magentaComponent * 100)
+		let K = Int16(colRGB.blackComponent * 100)
+		
+		if C < 0 || C > 255 || Y < 0 || Y > 255 || M < 0 || M > 255 || K < 0 || K > 255 { return nil }
+		
+		colS += String(format: "%02X", C)
+		colS += String(format: "%02X", M)
+		colS += String(format: "%02X", Y)
+		colS += String(format: "%02X", K)
+		
+		if inclAlpha {
+			let A = Int16(colRGB.alphaComponent * 100)
+			if A < 0 || A > 255 { return nil }
+			colS += String(format: "%02X", A)
+		}
+		
+		return colS
+	}
+	
+	/// Assumes prefix is one of &, x or no prefix.
+	/// This is checked by using the length (6/7 or 8/9 characters).
+	static func FromRGB(string: String) -> NSColor? {
+		let ct = string.count
+		var colString = string.uppercased()
+		if ct < 6 || ct > 9  { return nil }
+		if ct == 7 || ct == 9 {
+			colString = String(string[string.index(after: string.startIndex)...])
+		}
+		
+		if !colString.OnlyContains(chars: "0123456789ABCDEF") { return nil }
+		
+		let redPart = String(colString.GetChar(N: 0)!) + String(colString.GetChar(N: 1)!)
+		let greenPart = String(colString.GetChar(N: 2)!) + String(colString.GetChar(N: 3)!)
+		let bluePart = String(colString.GetChar(N: 4)!) + String(colString.GetChar(N: 5)!)
+		
+		var alpha : CGFloat = 1
+		if colString.count == 8 {
+			let alphaPart = String(colString.GetChar(N: 6)!) + String(colString.GetChar(N: 7)!)
+			alpha = CGFloat(Int(alphaPart)!) / 100
+		}
+		
+		let red = CGFloat(Int(redPart)!) / 100
+		let green = CGFloat(Int(greenPart)!) / 100
+		let blue = CGFloat(Int(bluePart)!) / 100
+		
+		return NSColor(red: red, green: green, blue: blue, alpha: alpha)
+	}
+	
+	/// Assumes prefix is one of &, x or no prefix.
+	/// This is checked by using the length (8/9 or 10/11 characters).
+	static func FromCMYK(string: String) -> NSColor? {
+		let ct = string.count
+		var colString = string.uppercased()
+		if ct < 8 || ct > 11  { return nil }
+		if ct == 9 || ct == 11 {
+			colString = String(string[string.index(after: string.startIndex)...])
+		}
+		
+		if !colString.OnlyContains(chars: "0123456789ABCDEF") { return nil }
+		
+		let cyanPart = String(colString.GetChar(N: 0)!) + String(colString.GetChar(N: 1)!)
+		let magentaPart = String(colString.GetChar(N: 2)!) + String(colString.GetChar(N: 3)!)
+		let yellowPart = String(colString.GetChar(N: 4)!) + String(colString.GetChar(N: 5)!)
+		let blackPart = String(colString.GetChar(N: 6)!) + String(colString.GetChar(N: 7)!)
+		
+		var alpha : CGFloat = 1
+		if colString.count == 10 {
+			let alphaPart = String(colString.GetChar(N: 8)!) + String(colString.GetChar(N: 9)!)
+			alpha = CGFloat(Int(alphaPart)!) / 100
+		}
+		
+		let cyan = CGFloat(Int(cyanPart)!) / 100
+		let magenta = CGFloat(Int(magentaPart)!) / 100
+		let yellow = CGFloat(Int(yellowPart)!) / 100
+		let black = CGFloat(Int(blackPart)!) / 100
+		
+		return NSColor(deviceCyan: cyan, magenta: magenta, yellow: yellow, black: black, alpha: alpha)
 	}
 }

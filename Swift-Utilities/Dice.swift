@@ -11,7 +11,7 @@ import Foundation
 enum DiceError : Error {
 	case unknownDiceFormat
 	case zeroError
-	}
+}
 
 struct Dice : Equatable, CustomDebugStringConvertible {
 	var X : UInt
@@ -118,7 +118,7 @@ struct Dice : Equatable, CustomDebugStringConvertible {
 		return total
 	}
 	
-	/// Multiple X by M
+	/// Multiply X by M
 	static func * (d : Dice, m : UInt) -> Dice {
 		return Dice(d.X * m, d.Y, d.Z)
 		}
