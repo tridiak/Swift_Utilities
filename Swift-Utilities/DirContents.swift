@@ -27,14 +27,14 @@ class DirContents : Sequence {
 	// List of dir item names
 	private(set) var names : [String] = []
 	
-	// See subscript
+	// See subscript. True is full path.
 	var nameOrPathFlag : Bool = false
 	
 	// Constructor
-	init?(path P : String) {
-		if P.isEmpty { return nil }
+	init(path P : String) throws {
+		if P.isEmpty { throw DirContentsEx.invalidPath }
 		
-		guard let R = PathClass(path: P) else { return nil }
+		guard let R = PathClass(path: P) else { throw DirContentsEx.invalidPath }
 		path = R
 		
 		path.RemoveDirMarker()

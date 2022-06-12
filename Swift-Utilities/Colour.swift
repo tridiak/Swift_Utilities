@@ -6,7 +6,11 @@
 //  Copyright © 2018 tridiak. All rights reserved.
 //
 
+#if os(macOS)
 import Cocoa
+#elseif os(iOS)
+import UIKit
+#endif
 
 // Using Int16 instead of UInt8 because in future may allow
 // ranges outside of 0-1
