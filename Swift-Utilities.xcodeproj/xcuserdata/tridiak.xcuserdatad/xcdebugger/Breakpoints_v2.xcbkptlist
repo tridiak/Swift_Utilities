@@ -15,10 +15,330 @@
             timestampString = "570923124.535803"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "367"
-            endingLineNumber = "367"
+            startingLineNumber = "366"
+            endingLineNumber = "366"
             landmarkName = "BinaryFileUsage()"
             landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "49A54B8D-1295-4923-B834-513009D43A0A"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Swift-Utilities/PathClass.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "101"
+            endingLineNumber = "101"
+            landmarkName = "Add(path:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "49A54B8D-1295-4923-B834-513009D43A0A - 52c1ec30391888b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SwiftUtilityApp.PathClass.Add(path: Swift.String) -&gt; SwiftUtilityApp.PathClass"
+                  moduleName = "SwiftUtilityApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tridiak/Programming/Utility/Swift-Utilities/Swift-Utilities/PathClass.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "101"
+                  endingLineNumber = "101"
+                  offsetFromSymbolStart = "92">
+               </Location>
+               <Location
+                  uuid = "49A54B8D-1295-4923-B834-513009D43A0A - 1849d729c4dd6803"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SwiftUtilityAppTests.PathClass.Add(path: Swift.String) -&gt; SwiftUtilityAppTests.PathClass"
+                  moduleName = "SwiftUtilityAppTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tridiak/Programming/Utility/Swift-Utilities/Swift-Utilities/PathClass.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "101"
+                  endingLineNumber = "101"
+                  offsetFromSymbolStart = "92">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0D50F361-D2B1-4C6B-8077-8C3320A1BC0A"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SwiftUtilityAppTests/SwiftUtilityAppTests.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "430"
+            endingLineNumber = "430"
+            landmarkName = "testPathClass()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "16249165-E20B-4060-9884-8A1C24462C7D"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Swift-Utilities/ZTextFile.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "35"
+            endingLineNumber = "35"
+            landmarkName = "init?(path:linefeed:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "16249165-E20B-4060-9884-8A1C24462C7D - 89a5dd873bea92b6"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SwiftUtilityApp.ZTextFile.init(path: Swift.String, linefeed: SwiftUtilityApp.ZTextFile.NewLine) -&gt; Swift.Optional&lt;SwiftUtilityApp.ZTextFile&gt;"
+                  moduleName = "SwiftUtilityApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tridiak/Programming/Utility/Swift-Utilities/Swift-Utilities/ZTextFile.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "35"
+                  endingLineNumber = "35"
+                  offsetFromSymbolStart = "282">
+               </Location>
+               <Location
+                  uuid = "16249165-E20B-4060-9884-8A1C24462C7D - 423c37afcf77333d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SwiftUtilityAppTests.ZTextFile.init(path: Swift.String, linefeed: SwiftUtilityAppTests.ZTextFile.NewLine) -&gt; Swift.Optional&lt;SwiftUtilityAppTests.ZTextFile&gt;"
+                  moduleName = "SwiftUtilityAppTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tridiak/Programming/Utility/Swift-Utilities/Swift-Utilities/ZTextFile.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "35"
+                  endingLineNumber = "35"
+                  offsetFromSymbolStart = "282">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "82D40353-1062-447C-A8FA-D623C24A4487"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Swift-Utilities/ZTextFile.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "133"
+            endingLineNumber = "133"
+            landmarkName = "RetrieveLines()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "82D40353-1062-447C-A8FA-D623C24A4487 - 29de7051e0eced67"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SwiftUtilityApp.ZTextFile.RetrieveLines() -&gt; Swift.Bool"
+                  moduleName = "SwiftUtilityApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tridiak/Programming/Utility/Swift-Utilities/Swift-Utilities/ZTextFile.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "125"
+                  endingLineNumber = "125"
+                  offsetFromSymbolStart = "2666">
+               </Location>
+               <Location
+                  uuid = "82D40353-1062-447C-A8FA-D623C24A4487 - b0bc4157d87f577"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SwiftUtilityAppTests.ZTextFile.RetrieveLines() -&gt; Swift.Bool"
+                  moduleName = "SwiftUtilityAppTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tridiak/Programming/Utility/Swift-Utilities/Swift-Utilities/ZTextFile.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "125"
+                  endingLineNumber = "125"
+                  offsetFromSymbolStart = "2666">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D85760E9-FFF6-4289-9315-4B73FB586DF6"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Swift-Utilities/ZTextFile.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "178"
+            endingLineNumber = "178"
+            landmarkName = "RetrieveLinesWindows()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "D85760E9-FFF6-4289-9315-4B73FB586DF6 - 848e68aeb7aefb20"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SwiftUtilityApp.ZTextFile.RetrieveLinesWindows() -&gt; Swift.Bool"
+                  moduleName = "SwiftUtilityApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tridiak/Programming/Utility/Swift-Utilities/Swift-Utilities/ZTextFile.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "170"
+                  endingLineNumber = "170"
+                  offsetFromSymbolStart = "4676">
+               </Location>
+               <Location
+                  uuid = "D85760E9-FFF6-4289-9315-4B73FB586DF6 - d9bcad4fbc7cee20"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SwiftUtilityAppTests.ZTextFile.RetrieveLinesWindows() -&gt; Swift.Bool"
+                  moduleName = "SwiftUtilityAppTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tridiak/Programming/Utility/Swift-Utilities/Swift-Utilities/ZTextFile.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "170"
+                  endingLineNumber = "170"
+                  offsetFromSymbolStart = "4676">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0AD914A7-0299-439D-B403-95F3E799DC14"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SwiftUtilityAppTests/SwiftUtilityAppTests.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "482"
+            endingLineNumber = "482"
+            landmarkName = "testZTextFile()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2669B56A-2AF6-4273-A752-7182590F6260"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Swift-Utilities/ZBigTextFile.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "179"
+            endingLineNumber = "179"
+            landmarkName = "subscript(idx:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "2669B56A-2AF6-4273-A752-7182590F6260 - 725b0e798e075848"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SwiftUtilityApp.ZBigTextFile.subscript.getter : (Swift.UInt) -&gt; Swift.Optional&lt;Swift.String&gt;"
+                  moduleName = "SwiftUtilityApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tridiak/Programming/Utility/Swift-Utilities/Swift-Utilities/ZBigTextFile.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "178"
+                  endingLineNumber = "178"
+                  offsetFromSymbolStart = "158">
+               </Location>
+               <Location
+                  uuid = "2669B56A-2AF6-4273-A752-7182590F6260 - 86473f4f563389a1"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SwiftUtilityAppTests.ZBigTextFile.subscript.getter : (Swift.UInt) -&gt; Swift.Optional&lt;Swift.String&gt;"
+                  moduleName = "SwiftUtilityAppTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tridiak/Programming/Utility/Swift-Utilities/Swift-Utilities/ZBigTextFile.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "178"
+                  endingLineNumber = "178"
+                  offsetFromSymbolStart = "158">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "ACDC3442-C327-440B-8FEC-FBAF69A9387C"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Swift-Utilities/ZBigTextFile.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "200"
+            endingLineNumber = "200"
+            landmarkName = "subscript(idx:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "ACDC3442-C327-440B-8FEC-FBAF69A9387C - 725b0e798e07579d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SwiftUtilityApp.ZBigTextFile.subscript.getter : (Swift.UInt) -&gt; Swift.Optional&lt;Swift.String&gt;"
+                  moduleName = "SwiftUtilityApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tridiak/Programming/Utility/Swift-Utilities/Swift-Utilities/ZBigTextFile.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "199"
+                  endingLineNumber = "199"
+                  offsetFromSymbolStart = "2203">
+               </Location>
+               <Location
+                  uuid = "ACDC3442-C327-440B-8FEC-FBAF69A9387C - 86473f4f56338674"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SwiftUtilityAppTests.ZBigTextFile.subscript.getter : (Swift.UInt) -&gt; Swift.Optional&lt;Swift.String&gt;"
+                  moduleName = "SwiftUtilityAppTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tridiak/Programming/Utility/Swift-Utilities/Swift-Utilities/ZBigTextFile.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "199"
+                  endingLineNumber = "199"
+                  offsetFromSymbolStart = "2203">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

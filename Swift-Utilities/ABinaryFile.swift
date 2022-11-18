@@ -94,19 +94,19 @@ class ABinaryFile {
 	
 	
 	deinit {
-		if blob != nil { blob.deallocate() }
+		if blob != nil { blob.deallocate(); blob = nil }
 	}
 	
 	// Subscript operator
 	subscript(byte: UInt64) -> UInt8? {
-		if byte >= dataSize { return nil }
+		if byte >= dataSize || byte >= Int.max { return nil }
 		return bytePtr[Int(byte)]
 	}
 	
 	/// Gets a UInt16 value at BYTE position.
 	/// It does not factor in endianness.
 	func B16(bytePos: UInt64) -> UInt16? {
-		if bytePos + 2 >= dataSize { return nil }
+		if bytePos + 2 >= dataSize || bytePos + 2 >= Int.max { return nil }
 		
 		let data : UInt16 = UInt16( bytePtr[Int(bytePos)] ) << 8 + UInt16( bytePtr[Int(bytePos) + 1] )
 		
@@ -116,7 +116,7 @@ class ABinaryFile {
 	/// Gets a UInt32 value at BYTE position.
 	/// It does not factor in endianness.
 	func B32(bytePos: UInt64) -> UInt32? {
-		if bytePos + 4 >= dataSize { return nil }
+		if bytePos + 4 >= dataSize || bytePos + 4 >= Int.max { return nil }
 		
 		let data : UInt32 = UInt32( bytePtr[Int(bytePos)] ) << 24 + UInt32( bytePtr[Int(bytePos) + 1] ) << 16
 			+ UInt32( bytePtr[Int(bytePos) + 2] ) << 8 + UInt32( bytePtr[Int(bytePos) + 3] )
@@ -127,7 +127,7 @@ class ABinaryFile {
 	/// Gets a UInt64 value at BYTE position.
 	/// It does not factor in endianness.
 	func B64(bytePos: UInt64) -> UInt64? {
-		if bytePos + 8 >= dataSize { return nil }
+		if bytePos + 8 >= dataSize || bytePos + 8 >= Int.max { return nil }
 		
 		var data : UInt64 = UInt64( bytePtr[Int(bytePos)] ) << 56 + UInt64( bytePtr[Int(bytePos) + 1] ) << 48
 		data += UInt64( bytePtr[Int(bytePos) + 2] ) << 40 + UInt64( bytePtr[Int(bytePos) + 3] ) << 32

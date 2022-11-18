@@ -28,15 +28,15 @@ struct Dice : Equatable, CustomDebugStringConvertible {
 				Y = UInt(ary[1])!
 				Z = 0
 			case "XdX+X":
-				let B = r.BeforeAndAfter(separator: "d")
+				let B = r.BeforeAndAfter(marker: "d")
 				X = UInt(B.before)!
-				let C = B.after!.BeforeAndAfter(separator: "+")
+				let C = B.after!.BeforeAndAfter(marker: "+")
 				Y = UInt(C.before)!
 				Z = Int(C.after!)!
 			case "XdX-X":
-				let B = r.BeforeAndAfter(separator: "d")
+				let B = r.BeforeAndAfter(marker: "d")
 				X = UInt(B.before)!
-				let C = B.after!.BeforeAndAfter(separator: "-")
+				let C = B.after!.BeforeAndAfter(marker: "-")
 				Y = UInt(C.before)!
 				Z = -Int(C.after!)!
 			case "dX":
@@ -47,14 +47,14 @@ struct Dice : Equatable, CustomDebugStringConvertible {
 				break
 			case "dX+X":
 				s = String(r[r.index(after: r.startIndex)...])
-				let R = s.BeforeAndAfter(separator: "+")
+				let R = s.BeforeAndAfter(marker: "+")
 				X = 1
 				Y = UInt(R.before)!
 				Z = Int(R.after!)!
 				break
 			case "dX-X":
 				s = String(r[r.index(after: r.startIndex)...])
-				let R = s.BeforeAndAfter(separator: "-")
+				let R = s.BeforeAndAfter(marker: "-")
 				X = 1
 				Y = UInt(R.before)!
 				Z = -Int(R.after!)!

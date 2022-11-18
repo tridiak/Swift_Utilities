@@ -12,8 +12,10 @@ extension String {
 	static let CompareOptsNone = String.CompareOptions.init(rawValue: 0)
 	
 	static func CharInSet(char: Character, set: CharacterSet) -> Bool {
-		let s = String(char)
-		return s.rangeOfCharacter(from: set) != nil
+		for uc in char.unicodeScalars {
+			if set.contains(uc) { return true }
+		}
+		return false
 	}
 	
 	/// Remove all characters in set from string and returning a new string.
@@ -23,8 +25,14 @@ extension String {
 		if self.isEmpty { return self }
 		var s : String = ""
 		
-		for c in self {
-			if !set.contains(c.unicodeScalars.first!) { s.append(c) }
+//		for c in self {
+//			if !String.CharInSet(char: c, set: set) {
+//				s.append(c)
+//			}
+//		}
+		
+		s = self.filter { C in
+			return !String.CharInSet(char: C, set: set)
 		}
 		
 		return s
@@ -61,7 +69,9 @@ extension String {
 		var s : String = ""
 		
 		for c in self {
-			if set.contains(c.unicodeScalars.first!) { s.append(c) }
+			if String.CharInSet(char: c, set: set) {
+				s.append(c)
+			}
 		}
 		
 		return s
@@ -70,7 +80,7 @@ extension String {
 	/// Mutates the string by keeping the characters in set.
 	/// - Parameter set: Characters to remove.
 	mutating func KeepThoseInM(set: CharacterSet) {
-		self = RemoveFrom(set: set)
+		self = KeepThoseIn(set: set)
 	}
 	
 	/// Keep all characters in set from string and returning a new string.
@@ -80,13 +90,13 @@ extension String {
 	func KeepThoseIn(set: String) -> String {
 		let S = CharacterSet.init(charactersIn: set)
 		
-		return RemoveFrom(set: S)
+		return KeepThoseIn(set: S)
 	}
 	
 	/// Mutates the string by keeping the characters in set.
 	/// - Parameter set: Characters to remove.
 	mutating func KeepThoseInM(set: String) {
-		self = RemoveFrom(set: set)
+		self = KeepThoseIn(set: set)
 	}
 	
 	//--------------------------------
@@ -262,7 +272,9 @@ extension String {
 			default: return nil
 		}
 		
-		return UInt.init(exactly: val)
+		if val > Double(UInt.max) { return nil }
+		// UInt(exactlty:) does not round
+		return UInt(val)
 	}
 	
 	/// Split string into equal count of charCount.
@@ -320,8 +332,9 @@ extension String {
 	}
 	
 	/// Return two substrings before and after first occurrence of 'separator'.
-	func BeforeAndAfter(separator: String) -> (before:String,after:String?) {
-		guard let idx = self.range(of: separator) else { return (self, nil) }
+	/// If marker is not found, result.before will return self and result.after will return nil.
+	func BeforeAndAfter(marker: String) -> (before:String,after:String?) {
+		guard let idx = self.range(of: marker) else { return (self, nil) }
 		
 		let B = String( self[..<idx.lowerBound] )
 		let A = String( self[idx.upperBound...] )
@@ -329,14 +342,18 @@ extension String {
 		return (B,A)
 	}
 	
+	static let hexToValue : [Character:UInt] = ["0":0, "1":1, "2":2, "3":3, "4":4, "5":5, "6":6, "7":7, "8":8,
+										 "9":9, "A":10, "a":10, "B":11, "b":11, "C":12, "c":12, "D":13,
+										 "d":13, "E":14, "e":14, "F":15, "f":15]
+	
 	/// Convert hex to UInt
 	func HexToUInt() -> UInt? {
-		if isEmpty { return 0 }
+		if isEmpty { return nil }
 		if self.count > 16 { return nil }
 		
 		var V : UInt = 0
 		for c in self {
-			guard let v = hexToValue[c] else { return nil }
+			guard let v = String.hexToValue[c] else { return nil }
 			V = V << 4
 			V += v
 		}
@@ -350,7 +367,7 @@ extension String {
 		if N >= self.count { return nil }
 		if N == 0 { return self.first! }
 		
-		let idx = index(startIndex, offsetBy: N)
+		let idx = index(startIndex, offsetBy: N - 1)
 		return self[idx]
 	}
 	
@@ -360,7 +377,7 @@ extension String {
 		if N >= self.count { return nil }
 		if N == 0 { return startIndex }
 		
-		return index(startIndex, offsetBy: N)
+		return index(startIndex, offsetBy: N - 1)
 	}
 	
 	/// Return substring after string.index
@@ -371,7 +388,7 @@ extension String {
 		return self[idx...]
 	}
 	
-	/// Append string if string is not empty
+	/// Append string if self is not empty
 	mutating func AppendNotEmpty(_ S: String) {
 		if !isEmpty { self.append(S) }
 	}
@@ -389,7 +406,7 @@ extension String {
 	
 	/// Returns true if string ends with passed string
 	func LastPartIs(_ S: String, options: String.CompareOptions = CompareOptsNone) -> Bool {
-		return self.range(of: S, options: .init(rawValue: 0), range: nil, locale: nil)?.upperBound == self.endIndex
+		return self.range(of: S, options: options.union(CompareOptions.backwards), range: nil, locale: nil)?.upperBound == self.endIndex
 	}
 	
 	/// Returns true and the element if any element in the passed String sequence is the first part of the String
@@ -419,6 +436,7 @@ extension String {
 	/// Returns first N characters of string. If self is empty, nil will be returned.
 	/// If count requested is 0, an empty string will be returned.
 	/// Not the most efficient method so keep the count small.
+	@available(*, deprecated, message: "Use [...GetNthIndex()] instead")
 	func FirstNChars(count ct: UInt) -> String? {
 		if count == 0 { return nil }
 		if ct == 0 { return "" }
@@ -449,7 +467,7 @@ extension String {
 	/// Change the extension of the passed string.
 	///
 	/// - Parameter to: new extension. Can be empty.
-	/// - Returns: String with new extension.
+	/// - Returns: String with new extension or original string if there is no extension.
 	func ChangeExtension(to:String) -> String {
 		guard let idx = self.range(of: ".", options: String.CompareOptions.backwards, range: nil, locale: nil) else {
 			return self
@@ -469,17 +487,35 @@ extension String {
 		
 		return String(self[..<idx.lowerBound])
 	}
+	
+	static func == (LHS: Character, RHS: String) -> Bool {
+		return RHS.count == 1 ? (LHS == RHS.first!) : false
+	}
+	
+	static func != (LHS: Character, RHS: String) -> Bool {
+		return RHS.count == 1 ? (LHS != RHS.first!) : false
+	}
+	
+	static func == (LHS: String, RHS: Character) -> Bool {
+		return LHS.count == 1 ? (RHS == LHS.first!) : false
+	}
+	
+	static func != (LHS: String, RHS: Character) -> Bool {
+		return LHS.count == 1 ? (RHS != LHS.first!) : false
+	}
+	
+	static func + (LHS: String, RHS: Character) -> String {
+		return LHS + String(RHS)
+	}
 }
 
-let hexToValue : [Character:UInt] = ["0":0, "1":1, "2":2, "3":3, "4":4, "5":5, "6":6, "7":7, "8":8,
-	"9":9, "A":10, "a":10, "B":11, "b":11, "C":12, "c":12, "D":13, "d":13, "E":14, "e":14,
-	"F":15, "f":15]
+
 
 //------------------------------------------------
 // MARK:- Array
 
 extension Array where Element : StringProtocol {
-	/// Returns index and length of longest string in array.
+	/// Returns first index and length of longest string in array.
 	/// Will return nil if array is empty.
 	func LongestString() -> (index: UInt, length: UInt)? {
 		if isEmpty { return nil }
@@ -533,10 +569,8 @@ extension Array where Element : StringProtocol {
 	}
 	
 	mutating func RemoveEmpty() {
-		var idx = self.startIndex
-		while idx < self.endIndex {
-			if self[idx].isEmpty { self.remove(at: idx) }
-			else { idx += 1 }
+		self = self.filter { SP in
+			return !SP.isEmpty
 		}
 	}
 }
@@ -551,6 +585,9 @@ let suffix1000 = ["byte", "KB", "MB", "GB", "TB", "PB"]
 extension UInt {
 	
 	func ByteString1024() -> String {
+		if self < 1024 {
+			return "\(self) byte"
+		}
 		var v : Double = Double(self)
 		var idx = 0
 		
@@ -565,6 +602,9 @@ extension UInt {
 	}
 	
 	func ByteString1000() -> String {
+		if self < 1000 {
+			return "\(self) byte"
+		}
 		var v : Double = Double(self)
 		var idx = 0
 		

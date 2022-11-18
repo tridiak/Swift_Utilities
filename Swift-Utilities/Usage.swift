@@ -25,17 +25,10 @@ func PNUsage() {
 
 func DirContentsUsage() {
 	let path = "/Users/tridiak/Documents/temp/Spells/"
-	if let dc = DirContents(path: path) {
+	do {
+		let dc = try DirContents(path: path)
 		
-		do {
-			try dc.Gather()
-		}
-		catch DirContents.DirContentsEx.notADir {
-			print("\(path) is not a dir")
-		}
-		catch {
-			print(error)
-		}
+		try dc.Gather()
 
 		dc.Sort()
 		dc.nameOrPathFlag = true
@@ -43,6 +36,12 @@ func DirContentsUsage() {
 		for item in dc {
 			print(item)
 		}
+	}
+	catch DirContents.DirContentsEx.notADir {
+		print("\(path) is not a dir")
+	}
+	catch {
+		print(error)
 	}
 	// /Users/tridiak/Documents/temp/Spells
 }
@@ -500,7 +499,7 @@ class FSNode : HierNode {
 	}
 	
 	override func Children() -> [PathClass] {
-		guard let DC = DirContents(path: path.path) else { return [] }
+		guard let DC = try? DirContents(path: path.path) else { return [] }
 		guard (try? DC.Gather()) != nil else { return [] }
 		
 		var paths : [PathClass] = []
