@@ -7,6 +7,11 @@
 //
 
 import Foundation
+#if os(macOS)
+import AppKit.NSFontManager
+#else
+import UIKit.UIFont
+#endif
 
 extension String {
 	static let CompareOptsNone = String.CompareOptions.init(rawValue: 0)
@@ -509,7 +514,75 @@ extension String {
 	}
 }
 
+//------------------------------------------------
+// MARK:- Attributed String
 
+#if os(macOS)
+typealias UnvColour = NSColor
+#else
+typealias UnvColour = UIColor
+#endif
+
+@available(macOS 12, iOS 15, *)
+extension AttributedString {
+	mutating func append(_ s: String) {
+		self.append(AttributedString(s))
+	}
+	
+	///  Returns an italicised string. Passing an empty string will return an empty AttributedString with no italics.
+	/// - Parameters:
+	///   - s: Source string
+	///   - colour: Black is default.
+	///   - fontName: Helvetica default.
+	///   - fontSize: Default is 12
+	/// - Returns: coloured, italicised string or nil if passed parameters are nonsense.
+	static func Italic(_ s: String, colour: UnvColour = .black, fontName: String = "Helvetica", fontSize: CGFloat = 12) -> AttributedString? {
+		if s.isEmpty { return AttributedString(s) }
+#if os(macOS)
+		guard let italic = NSFontManager.shared.font(withFamily: fontName, traits: .italicFontMask, weight: 5, size: fontSize) else { return nil }
+#else
+		guard let italic = UIFont(name: fontName, size: fontSize)?.italic else { return nil }
+#endif
+		let italicCont = AttributeContainer([NSAttributedString.Key.font : italic, NSAttributedString.Key.foregroundColor : colour] )
+		var ab = AttributedString(s)
+		ab.setAttributes(italicCont)
+		return ab
+	}
+	
+	///  Returns a bold string. Passing an empty string will return an empty AttributedString without bold.
+	/// - Parameters:
+	///   - s: Source string
+	///   - colour: Black is default.
+	///   - fontName: Helvetica default.
+	///   - fontSize: Default is 12
+	/// - Returns: coloured, bold string or nil if passed parameters are nonsense.
+	static func Bold(_ s: String, colour: UnvColour = .black, fontName: String = "Helvetica", fontSize: CGFloat = 12) -> AttributedString? {
+		if s.isEmpty { return AttributedString(s) }
+#if os(macOS)
+		guard let bold = NSFontManager.shared.font(withFamily: "Helvetica", traits: .boldFontMask, weight: 5, size: 12) else { return nil }
+#else
+		guard let bold = UIFont(name: "Helvetica", size: 12)?.bold else { return nil }
+#endif
+		let boldCont = AttributeContainer([NSAttributedString.Key.font : bold, NSAttributedString.Key.foregroundColor : colour] )
+		var ab = AttributedString(s)
+		ab.setAttributes(boldCont)
+		return ab
+	}
+	
+	
+	/// Returns coloured string. Passing an empty string will return an empty AttributedString with default system colour.
+	/// - Parameters:
+	///   - s: Source string
+	///   - colour: Default is black
+	/// - Returns: Coloured attributed string.
+	static func Colour(_ s: String, colour: UnvColour = .black) -> AttributedString {
+		if s.isEmpty { return AttributedString(s) }
+		let colourCont = AttributeContainer([NSAttributedString.Key.foregroundColor : colour] )
+		var ab = AttributedString(s)
+		ab.setAttributes(colourCont)
+		return ab
+	}
+}
 
 //------------------------------------------------
 // MARK:- Array
