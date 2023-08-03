@@ -156,7 +156,7 @@ class ZBigTextFile : Sequence {
 		set(V) {
 			_cacheLineCount = V
 			if lineCache.count > _cacheLineCount {
-				_ = lineCache.dropFirst(lineCache.count - Int(_cacheLineCount))
+				lineCache.dropFirst(lineCache.count - Int(_cacheLineCount))
 			}
 		}
 	}
@@ -171,7 +171,7 @@ class ZBigTextFile : Sequence {
 		
 		lineCache[idx] = s
 		if lineCache.count > _cacheLineCount {
-			_ = lineCache.dropFirst(Int(_cacheLineCount) / 2)
+			lineCache.dropFirst(Int(_cacheLineCount) / 2)
 		}
 	}
 	

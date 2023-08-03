@@ -50,9 +50,9 @@ func OKAlert(message : String, info : String, title: String, parent: NSWindow?) 
 func OKAlert(message : String, info : String, title: String, parent: UIViewController) {
 	let ctrl = UIAlertController(title: message, message: info, preferredStyle: .alert)
 	ctrl.addAction(UIAlertAction(title: "OK", style: .default) )
-	if let parent = parentController as? UIViewController {
+//	if let parent = parent as? UIViewController {
 		parent.present(ctrl, animated: true)
-	}
+//	}
 }
 #endif
 

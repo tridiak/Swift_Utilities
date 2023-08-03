@@ -525,8 +525,14 @@ typealias UnvColour = UIColor
 
 @available(macOS 12, iOS 15, *)
 extension AttributedString {
-	mutating func append(_ s: String) {
-		self.append(AttributedString(s))
+	mutating func append(_ s: String, fontName: String = "Helvetica", fontSize: CGFloat = 12, colour: UnvColour = .black) {
+#if os(macOS)
+		guard let font = NSFontManager.shared.font(withFamily: fontName, size: fontSize) else { return }
+#else
+		guard let font = UIFont(name: fontName, size: fontSize) else { return }
+#endif
+		let cont = AttributeContainer([NSAttributedString.Key.font : font, NSAttributedString.Key.foregroundColor : colour] )
+		self.append(AttributedString(s, attributes: cont))
 	}
 	
 	///  Returns an italicised string. Passing an empty string will return an empty AttributedString with no italics.
@@ -539,11 +545,15 @@ extension AttributedString {
 	static func Italic(_ s: String, colour: UnvColour = .black, fontName: String = "Helvetica", fontSize: CGFloat = 12) -> AttributedString? {
 		if s.isEmpty { return AttributedString(s) }
 #if os(macOS)
-		guard let italic = NSFontManager.shared.font(withFamily: fontName, traits: .italicFontMask, weight: 5, size: fontSize) else { return nil }
+		guard let italicFont = NSFontManager.shared.font(withFamily: fontName, traits: .italicFontMask, weight: 5, size: fontSize) else { return nil }
 #else
-		guard let italic = UIFont(name: fontName, size: fontSize)?.italic else { return nil }
+		guard let italicDesc = UIFont(name: fontName, size: fontSize)?.fontDescriptor.withSymbolicTraits(.traitItalic) else {
+			return nil
+			
+		}
+		let italicFont = UIFont(descriptor: italicDesc, size: fontSize)
 #endif
-		let italicCont = AttributeContainer([NSAttributedString.Key.font : italic, NSAttributedString.Key.foregroundColor : colour] )
+		let italicCont = AttributeContainer([NSAttributedString.Key.font : italicFont, NSAttributedString.Key.foregroundColor : colour] )
 		var ab = AttributedString(s)
 		ab.setAttributes(italicCont)
 		return ab
@@ -559,11 +569,16 @@ extension AttributedString {
 	static func Bold(_ s: String, colour: UnvColour = .black, fontName: String = "Helvetica", fontSize: CGFloat = 12) -> AttributedString? {
 		if s.isEmpty { return AttributedString(s) }
 #if os(macOS)
-		guard let bold = NSFontManager.shared.font(withFamily: "Helvetica", traits: .boldFontMask, weight: 5, size: 12) else { return nil }
+		guard let boldFont = NSFontManager.shared.font(withFamily: fontName, traits: .boldFontMask, weight: 5, size: fontSize) else { return nil }
 #else
-		guard let bold = UIFont(name: "Helvetica", size: 12)?.bold else { return nil }
+		
+		guard var boldDesc = UIFont(name: fontName, size: fontSize)?.fontDescriptor.withSymbolicTraits(.traitBold) else {
+			return nil
+			
+		}
+		let boldFont = UIFont(descriptor: boldDesc, size: fontSize)
 #endif
-		let boldCont = AttributeContainer([NSAttributedString.Key.font : bold, NSAttributedString.Key.foregroundColor : colour] )
+		let boldCont = AttributeContainer([NSAttributedString.Key.font : boldFont, NSAttributedString.Key.foregroundColor : colour] )
 		var ab = AttributedString(s)
 		ab.setAttributes(boldCont)
 		return ab
@@ -581,6 +596,28 @@ extension AttributedString {
 		var ab = AttributedString(s)
 		ab.setAttributes(colourCont)
 		return ab
+	}
+	
+	func SaveAsRTF(url: URL) -> Bool {
+		let nsa = NSAttributedString(self)
+		return nsa.SaveAsRTF(url: url)
+	}
+	
+	static func LoadFromRTF(url: URL) -> AttributedString? {
+		guard let nsa = NSAttributedString.LoadFromRTF(url: url) else { return nil }
+		return AttributedString(nsa)
+	}
+}
+
+extension NSAttributedString {
+	func SaveAsRTF(url: URL) -> Bool {
+		guard let data = try? self.data(from: NSRange(location: 0, length: self.length), documentAttributes: [NSAttributedString.DocumentAttributeKey.documentType : NSAttributedString.DocumentType.rtf]) else { return false }
+		return (try? data.write(to: url, options: Data.WritingOptions.atomic)) != nil
+	}
+	
+	static func LoadFromRTF(url: URL) -> NSAttributedString? {
+		guard let nsa = try? NSAttributedString(contentsOf: url) else { return nil }
+		return nsa
 	}
 }
 
@@ -690,4 +727,15 @@ extension UInt {
 		
 		return String(format: "%.2f %@", v, suffix1000[idx])
 	}
+}
+
+/// Returns string with ± prefixed.
+func Signed<S : SignedInteger>(_ m : S) -> String {
+	if m < 0 { return "\(m)" }
+	return "+\(m)"
+}
+
+/// Returns string with + prefixed.
+func Unsigned<S : UnsignedInteger>(_ m : S) -> String {
+	return "+\(m)"
 }

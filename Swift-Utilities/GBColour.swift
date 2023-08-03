@@ -77,7 +77,7 @@ struct GBColour : Codable, Equatable, Hashable {
 	/// Will return nil if colour space conversion is not possible.
 	init?(colour: UnvColor) {
 		// this conversion will not work with iOS
-		#if os(OSX)
+#if os(OSX)
 		var col : UnvColor!
 		
 		if #available(macOS 10.14, *) {
@@ -90,14 +90,18 @@ struct GBColour : Codable, Equatable, Hashable {
 		}
 		
 		
-		#elseif os(iOS)
-		guard let col = colour.ConverTo(colourSpace: CGColorSpace.init(name: CGColorSpace.sRGB)!) else {return nil}
-		#endif
+#elseif os(iOS)
+		guard let col = colour.ConvertTo(colourSpace: CGColorSpace.init(name: CGColorSpace.sRGB)!) else {return nil}
+#endif
 		// Important : iOS version uses an extension for XXXcompnent property as it is only defined in MacOS.
-		red = UInt8(col.redComponent * 255)
-		green = UInt8(col.greenComponent * 255)
-		blue = UInt8(col.blueComponent * 255)
-		alpha = UInt8(col.alphaComponent * 255)
+		guard var red = try? UInt8(col.redComponent * 255) else { return nil }
+		guard var green = try? UInt8(col.greenComponent * 255) else { return nil }
+		guard var blue = try? UInt8(col.blueComponent * 255) else { return nil }
+		guard var alpha = try? UInt8(col.alphaComponent * 255) else { return nil }
+		self.red = red
+		self.green = green
+		self.blue = blue
+		self.alpha = alpha
 	}
 	
 	/// Convert colour to hex string.
@@ -210,7 +214,7 @@ struct GBColour : Codable, Equatable, Hashable {
 	static let greenYellow = 	GBColour(colour: UnvColor(deviceRed: 173.0 / 255.0, green: 1, blue: 47.0 / 255.0, alpha: 1))!
 	static let honeydew = 	GBColour(colour: UnvColor(deviceRed: 240.0 / 255.0, green: 1, blue: 240.0 / 255.0, alpha: 1))!
 	// Same as Pink
-//	static let hotPink = 	GBColour(colour: UnvColor(deviceRed: 1, green: 105.0 / 255.0, blue: 180.0 / 255.0, alpha: 1))!
+	//	static let hotPink = 	GBColour(colour: UnvColor(deviceRed: 1, green: 105.0 / 255.0, blue: 180.0 / 255.0, alpha: 1))!
 	static let indianRed = 	GBColour(colour: UnvColor(deviceRed: 205.0 / 255.0, green: 92.0 / 255.0, blue: 92.0 / 255.0, alpha: 1))!
 	static let indigo = 	GBColour(colour: UnvColor(deviceRed: 75.0 / 255.0, green: 0.0 / 255.0, blue: 130.0 / 255.0, alpha: 1))!
 	static let ivory = 	GBColour(colour: UnvColor(deviceRed: 1, green: 1, blue: 240.0 / 255.0, alpha: 1))!
@@ -233,7 +237,7 @@ struct GBColour : Codable, Equatable, Hashable {
 	static let lightSteelBlue = 	GBColour(colour: UnvColor(deviceRed: 176.0 / 255.0, green: 196.0 / 255.0, blue: 222.0 / 255.0, alpha: 1))!
 	static let lightYellow = 	GBColour(colour: UnvColor(deviceRed: 1, green: 1, blue: 224.0 / 255.0, alpha: 1))!
 	// Same as Green
-//	static let lime = 	GBColour(colour: UnvColor(deviceRed: 0.0 / 255.0, green: 1, blue: 0.0 / 255.0, alpha: 1))!
+	//	static let lime = 	GBColour(colour: UnvColor(deviceRed: 0.0 / 255.0, green: 1, blue: 0.0 / 255.0, alpha: 1))!
 	static let limeGreen = 	GBColour(colour: UnvColor(deviceRed: 50.0 / 255.0, green: 205.0 / 255.0, blue: 50.0 / 255.0, alpha: 1))!
 	static let linen = 	GBColour(colour: UnvColor(deviceRed: 250.0 / 255.0, green: 240.0 / 255.0, blue: 230.0 / 255.0, alpha: 1))!
 	static let magenta = 	GBColour(colour: UnvColor(deviceRed: 1, green: 0.0 / 255.0, blue: 1, alpha: 1))!
@@ -291,24 +295,73 @@ struct GBColour : Codable, Equatable, Hashable {
 	static let wheat = 	GBColour(colour: UnvColor(deviceRed: 245.0 / 255.0, green: 222.0 / 255.0, blue: 179.0 / 255.0, alpha: 1))!
 	static let whiteSmoke = 	GBColour(colour: UnvColor(deviceRed: 245.0 / 255.0, green: 245.0 / 255.0, blue: 245.0 / 255.0, alpha: 1))!
 	static let yellowGreen = 	GBColour(colour: UnvColor(deviceRed: 154.0 / 255.0, green: 205.0 / 255.0, blue: 50.0 / 255.0, alpha: 1))!
-
+	
 	
 	static let constColours = [GBColour.black, .blue, .white, .brown, .gray, .green, .orange, .pink, .purple, .red, .yellow,
-	   aliceBlue, antiqueWhite, /*aqua,*/ aquaMarine, azure, beige, bisque, blanchedAlmond, blueViolet, burlyWood, cadetBlue,
-	   chartReuse, chocolate, coral, cornFlowerBlue, cornSilk, crimson, cyan, darkBlue, darkCyan, darkGoldenRod, darkGray,
-	   darkGreen, darkKhaki, darkMagenta, darkOliveGreen, darkOrange, darkOrchid, darkRed, darkSalmon, darkSeaGreen,
-	   darkSlateBlue, darkSlateGray, darkTurquoise, darkViolet, deepPink, deepSkyBlue, dimGray, dodgerBlue, firebrick,
-	   floralWhite, forestGreen, gainsboro, ghostWhite, gold, goldenRod, greenYellow, honeydew, /*hotPink,*/ indianRed,
-	   indigo, ivory, khaki, lavender, lavenderBlush, lawnGreen, lemonChiffon, lightBlue, lightCoral, lightCyan,
-	   lightGoldenRodYellow, lightGray, lightGreen, lightPink, lightSalmon, lightSeaGreen, lightSkyBlue, lightSlateGray,
-	   lightSteelBlue, lightYellow, /*lime,*/ limeGreen, linen, magenta, maroon, mediumAquaMarine, mediumBlue, mediumOrchid,
-	   mediumPurple, mediumSeaGreen, mediumSlateBlue, mediumSpringGreen, mediumTurquoise, mediumVioletRed, midnightBlue,
-	   mintCream, mistyRose, moccasin, navajoWhite, navy, oldLace, olive, oliveDrab, orangeRed, orchid, paleGoldenRod,
-	   paleGreen, paleTurquoise, paleVioletRed, papayaWhip, peachPuff, peru, plum, powderBlue, rosyBrown, royalBlue,
-	   saddleBrown, salmon, sandyBrown, seaGreen, seaShell, sienna, silver, skyBlue, slateBlue, slateGray, snow,
-	   springGreen, steelBlue, tan, teal, thistle, tomato, turquoise, violet, wheat, whiteSmoke, yellowGreen,
+							   aliceBlue, antiqueWhite, /*aqua,*/ aquaMarine, azure, beige, bisque, blanchedAlmond, blueViolet, burlyWood, cadetBlue,
+							   chartReuse, chocolate, coral, cornFlowerBlue, cornSilk, crimson, cyan, darkBlue, darkCyan, darkGoldenRod, darkGray,
+							   darkGreen, darkKhaki, darkMagenta, darkOliveGreen, darkOrange, darkOrchid, darkRed, darkSalmon, darkSeaGreen,
+							   darkSlateBlue, darkSlateGray, darkTurquoise, darkViolet, deepPink, deepSkyBlue, dimGray, dodgerBlue, firebrick,
+							   floralWhite, forestGreen, gainsboro, ghostWhite, gold, goldenRod, greenYellow, honeydew, /*hotPink,*/ indianRed,
+							   indigo, ivory, khaki, lavender, lavenderBlush, lawnGreen, lemonChiffon, lightBlue, lightCoral, lightCyan,
+							   lightGoldenRodYellow, lightGray, lightGreen, lightPink, lightSalmon, lightSeaGreen, lightSkyBlue, lightSlateGray,
+							   lightSteelBlue, lightYellow, /*lime,*/ limeGreen, linen, magenta, maroon, mediumAquaMarine, mediumBlue, mediumOrchid,
+							   mediumPurple, mediumSeaGreen, mediumSlateBlue, mediumSpringGreen, mediumTurquoise, mediumVioletRed, midnightBlue,
+							   mintCream, mistyRose, moccasin, navajoWhite, navy, oldLace, olive, oliveDrab, orangeRed, orchid, paleGoldenRod,
+							   paleGreen, paleTurquoise, paleVioletRed, papayaWhip, peachPuff, peru, plum, powderBlue, rosyBrown, royalBlue,
+							   saddleBrown, salmon, sandyBrown, seaGreen, seaShell, sienna, silver, skyBlue, slateBlue, slateGray, snow,
+							   springGreen, steelBlue, tan, teal, thistle, tomato, turquoise, violet, wheat, whiteSmoke, yellowGreen,
 	]
 	
 	
 }
 
+
+#if os(iOS)
+
+extension UIColor {
+	convenience init(deviceRed: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat = 1.0) {
+		self.init(red: deviceRed, green: green, blue: blue, alpha: alpha)
+	}
+	
+	func ConvertTo(colourSpace : CGColorSpace) -> UIColor? {
+		if let newCol = cgColor.converted(to: colourSpace, intent: CGColorRenderingIntent.defaultIntent, options: nil) {
+			return UIColor.init(cgColor: newCol)
+		}
+		return nil
+	}
+	
+	var redComponent : CGFloat {
+		get throws {
+			var c : CGFloat = 1.0
+			self.getRed(&c, green: nil, blue: nil, alpha: nil)
+			return c
+		}
+	}
+	
+	var greenComponent : CGFloat {
+		get throws {
+			var c : CGFloat = 1.0
+			self.getRed(nil, green: &c, blue: nil, alpha: nil)
+			return c
+		}
+	}
+	
+	var blueComponent : CGFloat {
+		get throws {
+			var c : CGFloat = 1.0
+			self.getRed(nil, green: nil, blue: &c, alpha: nil)
+			return c
+		}
+	}
+	
+	var alphaComponent : CGFloat {
+		get throws {
+			var c : CGFloat = 1.0
+			self.getRed(nil, green: nil, blue: nil, alpha: &c)
+			return c
+		}
+	}
+}
+
+#endif

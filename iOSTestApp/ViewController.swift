@@ -23,7 +23,7 @@ class ViewController: UIViewController {
 //			print(FLAG)
 //		}
 		
-		OKAlert(message: "Hello", info: "Info", title: "App", parentController: self)
+		OKAlert(message: "Hello", info: "Info", title: "App", parent: self)
 		
 	}
 }

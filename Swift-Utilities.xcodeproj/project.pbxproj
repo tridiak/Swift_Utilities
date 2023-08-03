@@ -56,6 +56,7 @@
 		9258302E21BCBDF40030F7DE /* DirContents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9258302D21BCBDF40030F7DE /* DirContents.swift */; };
 		9258303021BCCA0C0030F7DE /* Misc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9258302F21BCCA0C0030F7DE /* Misc.swift */; };
 		925D0A6E21C603D8006BA8AE /* BitField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925D0A6D21C603D8006BA8AE /* BitField.swift */; };
+		92604403295B9B6D00172711 /* StringStuff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926EB93921BB54EE0045C464 /* StringStuff.swift */; };
 		92698125237C92FC00C7AB05 /* AppList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92698124237C92FC00C7AB05 /* AppList.swift */; };
 		92698127237C930E00C7AB05 /* ArrayExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92698126237C930E00C7AB05 /* ArrayExt.swift */; };
 		926EB93321BB54D10045C464 /* Swift_Utilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 926EB93121BB54D10045C464 /* Swift_Utilities.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -643,6 +644,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				929F78A4286BFB1D00A0F82C /* ViewController.swift in Sources */,
+				92604403295B9B6D00172711 /* StringStuff.swift in Sources */,
 				929F78A0286BFB1D00A0F82C /* AppDelegate.swift in Sources */,
 				929F78B1286BFB2700A0F82C /* SimpleAlert.swift in Sources */,
 				929F78A2286BFB1D00A0F82C /* SceneDelegate.swift in Sources */,

@@ -46,6 +46,19 @@ struct ImmArray<T> : Collection {
 		array = Array(repeating: D, count: elemCount)
 	}
 	
+	init?(count: UInt, default D: T, initArray: [T]) {
+		
+		if count >= Int.max { return nil }
+		
+		elemCount = Int(count)
+		array = Array(repeating: D, count: elemCount)
+		var ct = 0
+		while ct < count && ct < initArray.count {
+			array[ct] = initArray[ct]
+			ct += 1
+		}
+	}
+	
 	// Return comparison of element 1 & element 2.
 	typealias SortBlock = (T,T) -> ComparisonResult
 	
